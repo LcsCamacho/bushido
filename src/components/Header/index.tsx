@@ -1,4 +1,4 @@
-import { listaBushido } from "@/pages";
+import { listaBushido } from "@/data/listaBushido";
 import { Dialog, Popover, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -8,12 +8,11 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-white">
+    <header className="bg-white max-[600px]:bg-slate-950">
       <nav
         className="mx-auto flex max-w-7xl items-center  min-[600px]:justify-center gap-4 p-6 lg:px-8"
         aria-label="Global"
       >
-
         <a
           href="#Criador"
           className="max-[600px]:hidden text-sm font-semibold leading-6 text-gray-900"
@@ -26,6 +25,13 @@ export default function Header() {
         >
           O que é o Bushidô
         </a>
+        <a
+          href="#exemplos"
+          onClick={() => setMobileMenuOpen(false)}
+          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+        >
+          Exemplos
+        </a>
         <div className="flex lg:hidden ml-auto">
           <button
             type="button"
@@ -33,7 +39,10 @@ export default function Header() {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon
+              className="h-6 w-6 max-[600px]:text-white"
+              aria-hidden="true"
+            />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
@@ -109,18 +118,49 @@ export default function Header() {
             </button>
           </div>
           <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
+            <div className="-my-6 divide-y ">
               <div className="space-y-2 py-6">
-                {listaBushido.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+                <a
+                  href="#Criador"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+                >
+                  Bushidô e seu Criador
+                </a>
+                <a
+                  href="#oqueé"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block  rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+                >
+                  O que é o Bushidô
+                </a>
+                <a
+                  href="#comparacao"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+                >
+                  Comparação com gerenciamento de projetos
+                </a>
+                <a
+                  href="#exemplos"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+                >
+                  Exemplos
+                </a>
               </div>
+            </div>
+            <div className="-my-6 ">
+              {listaBushido.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+                >
+                  {item.name}
+                </a>
+              ))}
             </div>
           </div>
         </Dialog.Panel>

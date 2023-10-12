@@ -1,66 +1,126 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import ModelCanvas3D from "@/components/Model3D/Samurai1";
+import { listaBushido } from "@/data/listaBushido";
+import compaixao from "/public/images/compaixao.jpg";
+import coragem from "/public/images/coragem.jpg";
+import honestidade from "/public/images/honestidade.jpg";
+import honra from "/public/images/honra.jpg";
+import justica from "/public/images/justiça.jpg";
+import lealdade from "/public/images/lealdade.jpg";
+import respeito from "/public/images/respeito.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const listaBushido = [
-  {
-    simbolo: "义",
-    href: "#Gi",
-    name: "Gi - Retidão",
-    description:
-      "Representa a integridade moral e ética, fazendo a coisa certa, mesmo quando é difícil.",
-  },
-  {
-    simbolo: "勇",
-    href: "#Yu",
-    name: "Yu - Coragem",
-    description: "Representa a coragem, bravura e heroísmo.",
-  },
-  {
-    simbolo: "仁",
-    href: "#Jin",
-    name: "Jin - Benevolência",
-    description: "Representa a compaixão e a benevolência.",
-  },
-  {
-    simbolo: "礼",
-    href: "#Rei",
-    name: "Rei - Respeito",
-    description: "Representa o respeito, cortesia e educação.",
-  },
-  {
-    simbolo: "誠",
-    href: "#Makoto",
-    name: "Makoto - Honestidade",
-    description: "Representa a honestidade e a sinceridade.",
-  },
-  {
-    simbolo: "名誉",
-    href: "#Meiyo",
-    name: "Meiyo - Honra",
-    description: "Representa a honra e a glória.",
-  },
-  {
-    simbolo: "忠义",
-    href: "#Chugi",
-    name: "Chūgi - Lealdade",
-    description: "Representa a lealdade.",
-  },
+const classTd =
+  "border-b cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
+const classTr = "hover:bg-gray-50 border-b dark:border-neutral-500";
+const classTh =
+  "border-b dark:border-slate-100 font-bold p-6 text-black dark:text-slate-200 text-left";
+
+const classSection =
+  "flex flex-col gap-2 justify-center items-start h-fit min-h-[800px] w-full";
+const classSectionMenor =
+  "flex flex-col gap-2 justify-start items-start h-fit mt-16 w-full";
+
+const exemplosHonra = [
+  "Um gerente de projeto que é honesto e transparente em suas ações.",
+  "Um funcionário que renuncia a um emprego que não está alinhado com seus valores.",
+  "Uma pessoa que diz a verdade, mesmo que seja difícil.",
 ];
 
+const exemplosCoragem = [
+  "Um gerente de projeto que toma uma decisão difícil, mesmo que seja impopular.",
+  "Um gerente de projeto que toma uma decisão difícil, mesmo que seja impopular.",
+  "Uma pessoa que defende o que acredita, mesmo que seja contra a corrente.",
+];
+
+const exemplosCompaixao = [
+  "Um gerente de projeto que apoia um membro da equipe que está passando por um momento difícil.",
+  "Um funcionário que ajuda um colega de trabalho a aprender uma nova habilidade.",
+  "Uma pessoa que doa seu tempo ou recursos para ajudar os outros.",
+];
+
+const exemplosRespeito = [
+  "Um gerente de projeto que trata todos os colegas de trabalho com respeito, independentemente de sua posição social.",
+  "Um funcionário que é educado e atencioso com seus colegas de trabalho e clientes.",
+  "Uma pessoa que trata os outros com dignidade e consideração.",
+];
+
+const BackCard = ({ description }: { description: string }) => {
+  return (
+    <div className="back p-3 will-change-transform  h-full">
+      <p className="max-[600px]:text-black write">{description}</p>
+    </div>
+  );
+};
+
+const FrontCard = ({ image }: { image: StaticImageData }) => {
+  return (
+    <div className="front will-change-transform">
+      <Image
+        className="w-full h-full object-cover rounded-xl"
+        src={image}
+        alt="Exemplo 1"
+      />
+    </div>
+  );
+};
+
+const CardExemplo = ({
+  image,
+  description,
+}: {
+  image: StaticImageData;
+  description: string;
+}) => {
+  return (
+    <div className="card-exemplo w-[300px] will-change-transform">
+      <FrontCard image={image}></FrontCard>
+      <BackCard description={description}></BackCard>
+    </div>
+  );
+}
+
 export default function Home() {
+  const [aleatorio, setAleatorio] = useState(0);
+  const exemplos = [
+    {
+      name: "Honra",
+      image: honra,
+      description: exemplosHonra,
+    },
+    {
+      name: "Coragem",
+      image: coragem,
+      description: exemplosCoragem,
+    },
+    {
+      name: "Benevolência",
+      image: compaixao,
+      description: exemplosCompaixao,
+    },
+    {
+      name: "Respeito",
+      image: respeito,
+      description: exemplosRespeito,
+    },
+  ];
+
   useEffect(() => {
     Aos.init({
       duration: 1000,
     });
   }, []);
+
+  const alteraAleatorio = () => {
+    setAleatorio(Math.floor(Math.random() * 3));
+  };
 
   return (
     <>
@@ -69,15 +129,12 @@ export default function Home() {
       </Head>
       <Header></Header>
       <main
-        className={`flex min-h-screen flex-col items-center justify-between min-[768px]:p-24 max-[768px]:p-6 max-[600px]:bg-slate-950 transition-all duration-1000  ${inter.className}`}
+        className={`flex min-h-screen gap-3 flex-col items-center justify-between min-[768px]:p-24 max-[768px]:p-6 max-[600px]:bg-slate-950 transition-all duration-1000  ${inter.className}`}
       >
-        <div className="content flex flex-col gap-3">
-          <div
-            id="Criador"
-            className="first-section h-[100vh] flex flex-col gap-2 justify-center items-start"
-          >
-            <h2 className="font-bold text-lg">Bushidô e seu Criador:</h2>
-            <p className="leading-8">
+        <div className="content flex flex-col gap-3 w-full">
+          <section id="Criador" className={classSectionMenor}>
+            <h2 className="font-bold text-lg">Bushidô e sua criação:</h2>
+            <p className="leading-8 w-full flex flex-wrap max-w-[90vw]">
               O Bushidô é um código de conduta que foi desenvolvido no Japão
               feudal e é associado aos samurais, a classe guerreira japonesa.
               Não há um criador específico do Bushidô, mas sim uma evolução ao
@@ -86,19 +143,9 @@ export default function Home() {
               desenvolvimento do Bushidô incluem Miyamoto Musashi, Yamamoto
               Tsunetomo e Nitobe Inazō.
             </p>
-            <div className="cards flex gap-3 w-full">
-            <div className="card w-full">
-                <ModelCanvas3D />
-            </div>
-            </div>
-            
-          </div>
-          <div
-            data-aos="fade-in"
-            id="oqueé"
-            className="second-section h-[100vh] flex flex-col gap-2 justify-center items-start"
-          >
-            <h2 className="font-bold text-lg">O que é:</h2>
+          </section>
+          <section data-aos="fade-in" id="oqueé" className={classSectionMenor}>
+            <h2 className="font-bold text-lg">O que é o Bushidô:</h2>
             <p className="lg:columns-2 max-[600px]:columns-1 leading-8">
               O Bushido (武士道) ou “Caminho do Guerreiro” é uma espécie de
               código de conduta que era levada muito a sério pelos samurais. Se
@@ -111,19 +158,20 @@ export default function Home() {
               coisa imperdoável e a única forma de lavar a sua honra era através
               do Harakiri (Ritual de Suicídio).
             </p>
-          </div>
-          <div
-            id="principios"
-            data-aos="fade-in"
-            className="second-section h-[100vh] flex flex-col gap-2 justify-center items-start"
-          >
+            <div className="cards flex gap-3 w-full mt-32">
+              <div className="card animate-bounce-slow  w-full max-h-[700px]">
+                <ModelCanvas3D />
+              </div>
+            </div>
+          </section>
+          <section id="principios" data-aos="fade-in" className={classSection}>
             <h2 className="font-bold text-lg">Princípios do Bushidô:</h2>
             <p>
               Os princípios do Bushidô variam ligeiramente ao longo do tempo e
               dependendo das fontes, mas geralmente incluem os seguintes sete
               princípios:
             </p>
-            <ul className="mt-8 list-none flex flex-col gap-6">
+            <ul className="mt-4 list-none flex flex-col gap-6">
               {listaBushido.map((item) => {
                 return (
                   <li
@@ -142,44 +190,36 @@ export default function Home() {
                 );
               })}
             </ul>
-          </div>
-          <div
-            id="comparacao"
-            data-aos="fade-in"
-            className="third-section min-h-[100vh] flex flex-col gap-2 justify-center items-start"
-          >
+          </section>
+          <section id="comparacao" data-aos="fade-in" className={classSection}>
             <h2 className="font-bold text-lg">
               Comparação com gerenciamento de projetos:
             </h2>
             <div className="tableContainer">
               <table className="min-w-full text-left font-light border-collapse table-fixed w-full text-sm bg-white rounded-xl">
                 <thead className="bg-gray-100 dark:bg-gray-800">
-                  <tr className="">
-                    <th className="border-b dark:border-slate-100 font-bold p-6 text-black dark:text-slate-200 text-left">
-                      Princípio do bushido
-                    </th>
-                    <th className="border-b dark:border-slate-100 font-bold p-6 text-black dark:text-slate-200  text-left">
-                      Gerenciamento de projetos
-                    </th>
+                  <tr>
+                    <th className={classTh}>Princípios</th>
+                    <th className={classTh}>Gerenciamento de projetos</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Gi - Retidão</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       No gerenciamento de projetos, a retidão está relacionada à
                       ética profissional, garantindo que todas as ações estejam
                       alinhadas com os valores da empresa e que o projeto seja
                       conduzido de forma ética.
                     </td>
                   </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200  text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Yu - Coragem</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       No gerenciamento de projetos, a retidão está relacionada à
                       ética profissional, garantindo que todas as ações estejam
                       alinhadas com os valores da empresa e que o projeto seja
@@ -187,50 +227,50 @@ export default function Home() {
                     </td>
                   </tr>
 
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Jin - Benevolência</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       Mostrar compaixão e respeito pela equipe e pelos
                       stakeholders é fundamental para construir relacionamentos
                       e garantir um ambiente de trabalho saudável
                     </td>
                   </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Rei - Respeito</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       O respeito pela autoridade e pelas normas do projeto é
                       essencial para manter a ordem e a coesão da equipe.
                     </td>
                   </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Makoto - Honestidade</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       A honestidade é crucial na comunicação dentro do projeto.
                       A transparência e a sinceridade ajudam a evitar
                       mal-entendidos e conflitos.
                     </td>
                   </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Meiyo - Honra</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       Manter a integridade do projeto e cumprir compromissos
                       contribui para a reputação e a credibilidade da equipe de
                       projeto.
                     </td>
                   </tr>
-                  <tr className="border-b dark:border-neutral-500">
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                  <tr className={classTr}>
+                    <td className={classTd}>
                       <strong>Chugi - Lealdade</strong>
                     </td>
-                    <td className="border-b dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-200 text-left">
+                    <td className={classTd}>
                       A lealdade à equipe e aos objetivos do projeto é
                       fundamental para manter a coesão e a colaboração.
                     </td>
@@ -238,7 +278,34 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
-          </div>
+          </section>
+          <section data-aos="fade-in" id="exemplos" className={classSection}>
+            <h2 className="font-bold text-lg">
+              Aqui estão alguns exemplos adicionais de onde os princípios do
+              Bushidô podem ser aplicados, em casos reais:
+            </h2>
+            <div className="cards-exemplo flex gap-6 items-center w-full flex-wrap  max-[600px]:gap-3">
+              {exemplos.map((item) => {
+                return (
+                  <div
+                    key={item.description[0]}
+                    className="flex flex-col w-full max-w-[300px] max-[600px]:max-w-[150px]"
+                  >
+                    <p className="py-2">{item.name}</p>
+                    <div
+                      onPointerEnter={alteraAleatorio}
+                      onMouseEnter={() => {
+                        alteraAleatorio();
+                      }}
+                      className="containerCard"
+                    >
+                      <CardExemplo  image={item.image} description={item.description[aleatorio]}></CardExemplo>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
         </div>
       </main>
     </>

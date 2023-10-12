@@ -15,11 +15,8 @@ const CanvasLoader = () => {
     >
       <span className="canvas-loader"></span>
       <p
-        style={{
-          fontSize: 18,
-          color: "#000",
-          fontWeight: 800,
-        }}
+      className="text-center text-2xl font-bold text-gray-900 dark:text-gray-100"
+        
       >
         {progress.toFixed(2)}%
       </p>

@@ -32,12 +32,27 @@ body {
 }
 
 #mobileMenu {
-  animation: Appear .3s ease-in-out forwards;
+  animation: Fade .3s ease-in-out forwards;
   opacity: 0;
   height: 100%;
 }
 
-@keyframes Appear {
+
+.write {
+  position: relative;
+}
+
+.write::after {
+  animation: Write 5s forwards;
+  width: 100%;
+  background-color: #fff;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+
+@keyframes Fade {
   0% {
     opacity: 0;
   }
@@ -47,6 +62,81 @@ body {
   }
 }
 
-.card {
-  aspect-ratio: 16/9;
+@keyframes Write {
+  0% {
+    width: 100%;
+  }
+  25% {
+    width: 75%;
+  }
+  50% {
+    width: 50%;
+  }
+  75% {
+    width: 25%;
+  }
+  100% {
+    width: 0;
+  }
 }
+
+.card, .card-exemplo, .card-exemplo img {
+  aspect-ratio: 9/16;
+}
+
+.card-exemplo {
+  width: max-content;
+  position: relative;
+  perspective: 1000px;
+}
+
+.containerCard {
+  max-width: 300px;
+  height: 400px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+  background: #fff;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .containerCard {
+    max-width: 150px;
+    height: 200px;
+  }
+  .card-exemplo img {
+    object-fit: contain;
+  }
+}
+
+.card-exemplo, .front, .back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  overflow: hidden;
+}
+
+.card-exemplo:hover .front {
+  transform: rotateY(-180deg);
+} 
+
+ .card-exemplo:hover .back {
+  transform: rotateY(0deg);
+}
+ 
