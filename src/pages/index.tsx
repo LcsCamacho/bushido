@@ -55,7 +55,7 @@ const exemplosRespeito = [
 const BackCard = ({ description }: { description: string }) => {
   return (
     <div className="back p-3 will-change-transform  h-full">
-      <p className="max-[600px]:text-black text-sm write">{description}</p>
+      <p className="max-[600px]:text-black text-sm write dark:text-white">{description}</p>
     </div>
   );
 };
