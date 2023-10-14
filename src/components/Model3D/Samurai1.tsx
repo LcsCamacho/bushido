@@ -33,7 +33,7 @@ const Model3D = ({ rotate: { setRotation, rotation } }: Model3DProps) => {
         shadow-mapSize={1024}
       />
       <pointLight intensity={0.35} />
-      <primitive object={computer.scene} scale={0.1} position={[0, -10, 0]} />
+      <primitive object={computer.scene} scale={0.15} position={[0, -10, 0]} />
     </mesh>
   );
 };

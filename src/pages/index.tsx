@@ -55,7 +55,7 @@ const exemplosRespeito = [
 const BackCard = ({ description }: { description: string }) => {
   return (
     <div className="back p-3 will-change-transform  h-full">
-      <p className="max-[600px]:text-black write">{description}</p>
+      <p className="max-[600px]:text-black text-sm write">{description}</p>
     </div>
   );
 };
@@ -88,7 +88,14 @@ const CardExemplo = ({
 }
 
 export default function Home() {
-  const [aleatorio, setAleatorio] = useState(0);
+  const [aleatorioHonra, setAleatorioHonra] = useState(0);
+  const [aleatorioCoragem, setAleatorioCoragem] = useState(0);
+  const [aleatorioCompaixao, setAleatorioCompaixao] = useState(0);
+  const [aleatorioRespeito, setAleatorioRespeito] = useState(0);
+  const [aleatorioHonestidade, setAleatorioHonestidade] = useState(0);
+  const [aleatorioJustica, setAleatorioJustica] = useState(0);
+  const [aleatorioLealdade, setAleatorioLealdade] = useState(0);
+  
   const exemplos = [
     {
       name: "Honra",
@@ -110,7 +117,24 @@ export default function Home() {
       image: respeito,
       description: exemplosRespeito,
     },
+    {
+      name: "Honestidade",
+      image: honestidade,
+      description: exemplosHonra,
+    },
+    {
+      name: "Justiça",
+      image: justica,
+      description: exemplosCoragem,
+    },
+    {
+      name: "Lealdade",
+      image: lealdade,
+      description: exemplosCompaixao,
+    }
   ];
+
+  type PrinciplesEnum = "honra" | "coragem" | "benevolência" | "respeito" | "honestidade" | "justiça" | "lealdade";
 
   useEffect(() => {
     Aos.init({
@@ -118,9 +142,32 @@ export default function Home() {
     });
   }, []);
 
-  const alteraAleatorio = () => {
-    setAleatorio(Math.floor(Math.random() * 3));
+  const alteraAleatorio = (aleatorioType: PrinciplesEnum) => {
+    const aleatorio = Math.floor(Math.random() * 3);
+    const type = {
+      honra: () => setAleatorioHonra(aleatorio),
+      coragem: () =>  setAleatorioCoragem(aleatorio),
+      benevolência: () =>  setAleatorioCompaixao(aleatorio),
+      respeito: () =>  setAleatorioRespeito(aleatorio),
+      honestidade: () =>  setAleatorioHonestidade(aleatorio),
+      justiça: () =>  setAleatorioJustica(aleatorio),
+      lealdade: () =>  setAleatorioLealdade(aleatorio),
+    }
+    setTimeout(type[aleatorioType],1000) ;
   };
+
+  const getAleatorioType = (aleatorioType: PrinciplesEnum) => {
+    const aleatorios = {
+      honra: aleatorioHonra,
+      coragem: aleatorioCoragem,
+      benevolência: aleatorioCompaixao,
+      respeito: aleatorioRespeito,
+      honestidade: aleatorioHonestidade,
+      justiça: aleatorioJustica,
+      lealdade: aleatorioLealdade,
+    }
+    return aleatorios[aleatorioType];
+  }
 
   return (
     <>
@@ -158,8 +205,8 @@ export default function Home() {
               coisa imperdoável e a única forma de lavar a sua honra era através
               do Harakiri (Ritual de Suicídio).
             </p>
-            <div className="cards flex gap-3 w-full mt-32">
-              <div className="card animate-bounce-slow  w-full max-h-[700px]">
+            <div className="cards flex gap-3 w-full mt-12">
+              <div className="card animate-bounce-slow  w-full max-h-[400px]">
                 <ModelCanvas3D />
               </div>
             </div>
@@ -286,6 +333,8 @@ export default function Home() {
             </h2>
             <div className="cards-exemplo flex gap-6 items-center w-full flex-wrap  max-[600px]:gap-3">
               {exemplos.map((item) => {
+                const itemNameType = item.name.toLowerCase() as PrinciplesEnum;
+                const description = item.description[getAleatorioType(itemNameType)]; 
                 return (
                   <div
                     key={item.description[0]}
@@ -293,13 +342,11 @@ export default function Home() {
                   >
                     <p className="py-2">{item.name}</p>
                     <div
-                      onPointerEnter={alteraAleatorio}
-                      onMouseEnter={() => {
-                        alteraAleatorio();
-                      }}
+                      onPointerLeave={() => alteraAleatorio(itemNameType)}
+                      onMouseLeave={() => alteraAleatorio(itemNameType)}
                       className="containerCard"
                     >
-                      <CardExemplo  image={item.image} description={item.description[aleatorio]}></CardExemplo>
+                      <CardExemplo  image={item.image} description={description}></CardExemplo>
                     </div>
                   </div>
                 );
