@@ -18,7 +18,7 @@ import respeito from "/public/images/respeito.jpg";
 const inter = Inter({ subsets: ["latin"] });
 
 const classTd =
-  "border-b cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
+  "border-b text-white cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
 const classTr = "hover:bg-gray-50 border-b dark:border-neutral-500";
 const classTh =
   "border-b dark:border-slate-100 font-bold p-6 text-black dark:text-slate-200 text-left";
@@ -55,7 +55,7 @@ const exemplosRespeito = [
 const BackCard = ({ description }: { description: string }) => {
   return (
     <div className="back p-3 will-change-transform  h-full">
-      <p className="max-[600px]:text-black text-sm write dark:text-white">{description}</p>
+      <p className="max-[600px]:text-black text-sm write dark:text-white text-white">{description}</p>
     </div>
   );
 };
@@ -205,7 +205,7 @@ export default function Home() {
               coisa imperdoável e a única forma de lavar a sua honra era através
               do Harakiri (Ritual de Suicídio).
             </p>
-            <div className="cards flex gap-3 w-full mt-12">
+            <div className="cards flex gap-3 w-full mt-32">
               <div className="card animate-bounce-slow  w-full max-h-[400px]">
                 <ModelCanvas3D />
               </div>
