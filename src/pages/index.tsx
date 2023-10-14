@@ -16,7 +16,6 @@ import lealdade from "/public/images/lealdade.jpg";
 import respeito from "/public/images/respeito.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
-
 const classTd =
   "border-b text-white cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
 const classTr = "hover:bg-gray-50 border-b dark:border-neutral-500";
@@ -55,7 +54,7 @@ const exemplosRespeito = [
 const BackCard = ({ description }: { description: string }) => {
   return (
     <div className="back p-3 will-change-transform  h-full">
-      <p className="max-[600px]:text-black text-sm write dark:text-white text-white">{description}</p>
+      <p className="max-[600px]:text-black max-[600px]:text-sm write dark:text-white text-white">{description}</p>
     </div>
   );
 };
