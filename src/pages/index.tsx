@@ -17,7 +17,7 @@ import respeito from "/public/images/respeito.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
 const classTd =
-  "border-b text-white cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
+  "border-b dark:text-white cursor-pointer dark:border-slate-600 font-medium p-6 text-slate-900 dark:text-slate-200 max-[600px]:text-slate-950 text-left";
 const classTr = "hover:bg-gray-50 border-b dark:border-neutral-500";
 const classTh =
   "border-b dark:border-slate-100 font-bold p-6 text-black dark:text-slate-200 text-left";
