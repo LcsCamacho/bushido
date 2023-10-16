@@ -28,7 +28,7 @@ export default function Header() {
         <a
           href="#exemplos"
           onClick={() => setMobileMenuOpen(false)}
-          className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
+          className=" max-[600px]:hidden -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-100"
         >
           Exemplos
         </a>
