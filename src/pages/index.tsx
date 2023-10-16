@@ -7,13 +7,6 @@ import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import ModelCanvas3D from "@/components/Model3D/Samurai1";
 import { listaBushido } from "@/data/listaBushido";
-import compaixao from "/public/images/compaixao.jpg";
-import coragem from "/public/images/coragem.jpg";
-import honestidade from "/public/images/honestidade.jpg";
-import honra from "/public/images/honra.jpg";
-import justica from "/public/images/justiça.jpg";
-import lealdade from "/public/images/lealdade.jpg";
-import respeito from "/public/images/respeito.jpg";
 
 const inter = Inter({ subsets: ["latin"] });
 const classTd =
@@ -27,29 +20,7 @@ const classSection =
 const classSectionMenor =
   "flex flex-col gap-2 justify-start items-start h-fit mt-16 w-full";
 
-const exemplosHonra = [
-  "Um gerente de projeto que é honesto e transparente em suas ações.",
-  "Um funcionário que renuncia a um emprego que não está alinhado com seus valores.",
-  "Uma pessoa que diz a verdade, mesmo que seja difícil.",
-];
 
-const exemplosCoragem = [
-  "Um gerente de projeto que toma uma decisão difícil, mesmo que seja impopular.",
-  "Um gerente de projeto que toma uma decisão difícil, mesmo que seja impopular.",
-  "Uma pessoa que defende o que acredita, mesmo que seja contra a corrente.",
-];
-
-const exemplosCompaixao = [
-  "Um gerente de projeto que apoia um membro da equipe que está passando por um momento difícil.",
-  "Um funcionário que ajuda um colega de trabalho a aprender uma nova habilidade.",
-  "Uma pessoa que doa seu tempo ou recursos para ajudar os outros.",
-];
-
-const exemplosRespeito = [
-  "Um gerente de projeto que trata todos os colegas de trabalho com respeito, independentemente de sua posição social.",
-  "Um funcionário que é educado e atencioso com seus colegas de trabalho e clientes.",
-  "Uma pessoa que trata os outros com dignidade e consideração.",
-];
 
 const BackCard = ({ description }: { description: string }) => {
   return (
@@ -95,43 +66,7 @@ export default function Home() {
   const [aleatorioJustica, setAleatorioJustica] = useState(0);
   const [aleatorioLealdade, setAleatorioLealdade] = useState(0);
   
-  const exemplos = [
-    {
-      name: "Honra",
-      image: honra,
-      description: exemplosHonra,
-    },
-    {
-      name: "Coragem",
-      image: coragem,
-      description: exemplosCoragem,
-    },
-    {
-      name: "Benevolência",
-      image: compaixao,
-      description: exemplosCompaixao,
-    },
-    {
-      name: "Respeito",
-      image: respeito,
-      description: exemplosRespeito,
-    },
-    {
-      name: "Honestidade",
-      image: honestidade,
-      description: exemplosHonra,
-    },
-    {
-      name: "Justiça",
-      image: justica,
-      description: exemplosCoragem,
-    },
-    {
-      name: "Lealdade",
-      image: lealdade,
-      description: exemplosCompaixao,
-    }
-  ];
+
 
   type PrinciplesEnum = "honra" | "coragem" | "benevolência" | "respeito" | "honestidade" | "justiça" | "lealdade";
 
@@ -331,9 +266,9 @@ export default function Home() {
               Bushidô podem ser aplicados, em casos reais:
             </h2>
             <div className="cards-exemplo flex gap-6 items-center w-full flex-wrap  max-[600px]:gap-3">
-              {exemplos.map((item) => {
+              {listaBushido.map((item) => {
                 const itemNameType = item.name.toLowerCase() as PrinciplesEnum;
-                const description = item.description[getAleatorioType(itemNameType)]; 
+                const description = item.exemplos[getAleatorioType(itemNameType)]; 
                 return (
                   <div
                     key={item.description[0]}
