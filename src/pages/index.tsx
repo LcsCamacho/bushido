@@ -66,9 +66,14 @@ export default function Home() {
   const [aleatorioJustica, setAleatorioJustica] = useState(0);
   const [aleatorioLealdade, setAleatorioLealdade] = useState(0);
   
+  const [tamanhoTela, setTamanhoTela] = useState(0);
 
+  useEffect(() => {
+    setTamanhoTela(window.innerWidth);
+    console.log(window.innerWidth);
+  }, []);
 
-  type PrinciplesEnum = "honra" | "coragem" | "benevolência" | "respeito" | "honestidade" | "justiça" | "lealdade";
+  type PrinciplesEnum = "gi" | "yu" | "jin" | "rei" | "makoto" | "meiyo" | "chugi";
 
   useEffect(() => {
     Aos.init({
@@ -79,26 +84,26 @@ export default function Home() {
   const alteraAleatorio = (aleatorioType: PrinciplesEnum) => {
     const aleatorio = Math.floor(Math.random() * 3);
     const type = {
-      honra: () => setAleatorioHonra(aleatorio),
-      coragem: () =>  setAleatorioCoragem(aleatorio),
-      benevolência: () =>  setAleatorioCompaixao(aleatorio),
-      respeito: () =>  setAleatorioRespeito(aleatorio),
-      honestidade: () =>  setAleatorioHonestidade(aleatorio),
-      justiça: () =>  setAleatorioJustica(aleatorio),
-      lealdade: () =>  setAleatorioLealdade(aleatorio),
+      gi: () => setAleatorioHonra(aleatorio),
+      yu: () =>  setAleatorioCoragem(aleatorio),
+      jin: () =>  setAleatorioCompaixao(aleatorio),
+      rei: () =>  setAleatorioRespeito(aleatorio),
+      makoto: () =>  setAleatorioHonestidade(aleatorio),
+      meiyo: () =>  setAleatorioJustica(aleatorio),
+      chugi: () =>  setAleatorioLealdade(aleatorio),
     }
     setTimeout(type[aleatorioType],1000) ;
   };
 
   const getAleatorioType = (aleatorioType: PrinciplesEnum) => {
     const aleatorios = {
-      honra: aleatorioHonra,
-      coragem: aleatorioCoragem,
-      benevolência: aleatorioCompaixao,
-      respeito: aleatorioRespeito,
-      honestidade: aleatorioHonestidade,
-      justiça: aleatorioJustica,
-      lealdade: aleatorioLealdade,
+      gi: aleatorioHonra,
+      yu: aleatorioCoragem,
+      jin: aleatorioCompaixao,
+      rei: aleatorioRespeito,
+      makoto: aleatorioHonestidade,
+      meiyo: aleatorioJustica,
+      chugi: aleatorioLealdade,
     }
     return aleatorios[aleatorioType];
   }
@@ -267,11 +272,14 @@ export default function Home() {
             </h2>
             <div className="cards-exemplo flex gap-6 items-center w-full flex-wrap  max-[600px]:gap-3">
               {listaBushido.map((item) => {
-                const itemNameType = item.name.toLowerCase() as PrinciplesEnum;
+                const itemNameType = item.key.toLowerCase() as PrinciplesEnum;
                 const description = item.exemplos[getAleatorioType(itemNameType)]; 
+                console.log(description)
+                console.log(getAleatorioType(itemNameType))
+                console.log(itemNameType)
                 return (
                   <div
-                    key={item.description[0]}
+                    key={item.name}
                     className="flex flex-col w-full max-w-[300px] max-[600px]:max-w-[150px]"
                   >
                     <p className="py-2">{item.name}</p>
@@ -280,7 +288,7 @@ export default function Home() {
                       onMouseLeave={() => alteraAleatorio(itemNameType)}
                       className="containerCard"
                     >
-                      <CardExemplo  image={item.image} description={description}></CardExemplo>
+                      <CardExemplo  image={tamanhoTela > 600 ? item.image : item.imageDark} description={description}></CardExemplo>
                     </div>
                   </div>
                 );

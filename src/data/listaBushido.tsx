@@ -5,6 +5,13 @@ import reiImage from "../../public/images/rei.png";
 import makotoImage from "../../public/images/makoto.png";
 import meiyoImage from "../../public/images/meiyo.png";
 import chugiImage from "../../public/images/chugi.png";
+import giDarkImage from "../../public/images/gi-dark.png";
+import yuDarkImage from "../../public/images/yu-dark.png";
+import jinDarkImage from "../../public/images/jin-dark.png";
+import reiDarkImage from "../../public/images/rei-dark.png";
+import makotoDarkImage from "../../public/images/makoto-dark.png";
+import meiyoDarkImage from "../../public/images/meiyo-dark.png";
+import chugiDarkImage from "../../public/images/chugi-dark.png";
 
 const exemplosHonra = [
   "Um gerente de projeto que é honesto e transparente em suas ações.",
@@ -32,7 +39,9 @@ const exemplosRespeito = [
 
 export const listaBushido = [
   {
+    key: "gi",
     image: giImage,
+    imageDark: giDarkImage,
     simbolo: "义",
     href: "#Gi",
     name: "Gi - Retidão",
@@ -41,7 +50,9 @@ export const listaBushido = [
       "Representa a integridade moral e ética, fazendo a coisa certa, mesmo quando é difícil.",
   },
   {
+    key: "yu",
     image: yuImage,
+    imageDark: yuDarkImage,
     simbolo: "勇",
     href: "#Yu",
     name: "Yu - Coragem",
@@ -49,7 +60,9 @@ export const listaBushido = [
     description: "Representa a coragem, bravura e heroísmo.",
   },
   {
+    key: "jin",
     image: jinImage,
+    imageDark: jinDarkImage,
     simbolo: "仁",
     href: "#Jin",
     name: "Jin - Benevolência",
@@ -57,7 +70,9 @@ export const listaBushido = [
     description: "Representa a compaixão e a benevolência.",
   },
   {
+    key: "rei",
     image: reiImage,
+    imageDark: reiDarkImage,
     simbolo: "礼",
     href: "#Rei",
     name: "Rei - Respeito",
@@ -65,7 +80,9 @@ export const listaBushido = [
     description: "Representa o respeito, cortesia e educação.",
   },
   {
+    key: "makoto",
     image: makotoImage,
+    imageDark: makotoDarkImage,
     simbolo: "誠",
     href: "#Makoto",
     name: "Makoto - Honestidade",
@@ -73,7 +90,9 @@ export const listaBushido = [
     description: "Representa a honestidade e a sinceridade.",
   },
   {
+    key: "meiyo",
     image: meiyoImage,
+    imageDark: meiyoDarkImage,
     simbolo: "名誉",
     href: "#Meiyo",
     name: "Meiyo - Honra",
@@ -81,7 +100,9 @@ export const listaBushido = [
     description: "Representa a honra e a glória.",
   },
   {
+    key: "chugi",
     image: chugiImage,
+    imageDark: chugiDarkImage,
     simbolo: "忠义",
     href: "#Chugi",
     name: "Chūgi - Lealdade",
