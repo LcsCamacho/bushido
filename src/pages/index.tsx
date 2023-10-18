@@ -282,7 +282,7 @@ export default function Home() {
                     key={item.name}
                     className="flex flex-col w-full max-w-[300px] max-[600px]:max-w-[150px]"
                   >
-                    <p className="py-2">{item.name}</p>
+                    <p className="py-2 min-h-[60px]">{item.name}</p>
                     <div
                       onPointerLeave={() => alteraAleatorio(itemNameType)}
                       onMouseLeave={() => alteraAleatorio(itemNameType)}
